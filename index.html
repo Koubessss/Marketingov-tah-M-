@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MR Custom Labs · Výběr herní sestavy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0c0f17;
+            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            background-image: radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.03) 0%, transparent 30%),
+                              radial-gradient(circle at 90% 80%, rgba(255, 215, 0, 0.03) 0%, transparent 40%);
+        }
+
+        .container {
+            max-width: 1300px;
+            width: 100%;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .logo {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #f0b90b, #ffd966);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 15px 25px rgba(255, 200, 0, 0.3);
+        }
+
+        .logo span {
+            font-size: 38px;
+            font-weight: 800;
+            color: #0b0e14;
+        }
+
+        .brand h1 {
+            color: white;
+            font-size: 2.2rem;
+            font-weight: 700;
+            line-height: 1.1;
+        }
+
+        .brand .subtitle {
+            color: #ffd966;
+            font-size: 1rem;
+            letter-spacing: 2px;
+        }
+
+        .student-info {
+            background: #1e2437;
+            padding: 12px 28px;
+            border-radius: 60px;
+            border: 1px solid #ffd966;
+            color: #ffd966;
+            font-weight: 500;
+            font-size: 1.1rem;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+        }
+
+        /* Hlavní nadpis */
+        .main-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .main-title h2 {
+            font-size: 3rem;
+            background: linear-gradient(to right, #fff, #ffe484);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(255, 200, 0, 0.3);
+        }
+
+        .main-title p {
+            color: #9aa4c4;
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            border-left: 4px solid #ffd966;
+            padding-left: 25px;
+            text-align: left;
+        }
+
+        /* Karty sestav */
+        .pc-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .pc-card {
+            background: #141a26;
+            border-radius: 40px;
+            border: 1px solid #2e3440;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 25px 40px -15px black;
+        }
+
+        .pc-card:hover {
+            transform: translateY(-10px);
+            border-color: #ffd966;
+            box-shadow: 0 30px 50px -15px #ffd96630;
+        }
+
+        .card-header {
+            background: linear-gradient(45deg, #1f2537, #151b28);
+            padding: 25px 25px 15px;
+            border-bottom: 1px solid #2f3646;
+        }
+
+        .budget-badge {
+            display: inline-block;
+            background: #ffd966;
+            color: #0b0e14;
+            font-weight: 700;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            border: 1px solid #fae26b;
+        }
+
+        .pc-name {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #ffd966;
+        }
+
+        .price small {
+            font-size: 1rem;
+            color: #8f9bb3;
+            font-weight: 400;
+        }
+
+        .card-body {
+            padding: 25px;
+        }
+
+        .spec-list {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .spec-list li {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            color: #cbd5e6;
+            font-size: 0.95rem;
+            border-bottom: 1px dashed #2a3142;
+            padding-bottom: 8px;
+        }
+
+        .spec-list li strong {
+            color: #ffd966;
+            min-width: 100px;
+            font-weight: 600;
+        }
+
+        .btn {
+            display: block;
+            background: transparent;
+            border: 2px solid #ffd966;
+            color: #ffd966;
+            text-align: center;
+            padding: 16px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            margin-top: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background: #ffd966;
+            color: #0b0e14;
+            box-shadow: 0 0 20px #ffd966;
+        }
+
+        .btn-primary {
+            background: #ffd966;
+            color: #0b0e14;
+            border: none;
+            box-shadow: 0 8px 0 #9e7e2e;
+        }
+
+        .btn-primary:hover {
+            background: #ffe174;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 0 #9e7e2e;
+        }
+
+        /* Patička */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #0a0d14;
+            border-radius: 60px;
+            padding: 25px 35px;
+            border: 1px solid #2d3445;
+            margin-top: 40px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .contact {
+            display: flex;
+            gap: 35px;
+            flex-wrap: wrap;
+            color: #b5c0da;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-item i {
+            color: #ffd966;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .qr-placeholder {
+            background: #1e2537;
+            width: 65px;
+            height: 65px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ffd966;
+            color: #ffd966;
+        }
+
+        .note {
+            text-align: center;
+            margin-top: 30px;
+            color: #4c5470;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 1000px) {
+            .pc-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 650px) {
+            .pc-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- HLAVIČKA -->
+        <div class="header">
+            <div class="logo-area">
+                <div class="logo">
+                    <span>MR</span>
+                </div>
+                <div class="brand">
+                    <h1>MATYÁŠ ŘEHOŘ</h1>
+                    <div class="subtitle">CUSTOM LABS · 2.I</div>
+                </div>
+            </div>
+            <div class="student-info">
+                📅 26. 2. 2026 · 3 sestavy na míru
+            </div>
+        </div>
+
+        <!-- TITULEK -->
+        <div class="main-title">
+            <h2>VYBERTE SI SVOU HERNÍ ZBRAŇ</h2>
+            <p>Podle rozpočtu jsme pro vás připravili tři exkluzivní sestavy. Každá je optimalizovaná pro maximální výkon v dané cenové kategorii.</p>
+        </div>
+
+        <!-- KARTY SESTAV -->
+        <div class="pc-grid">
+            <!-- KARTA 20.000 Kč -->
+            <div class="pc-card">
+                <div class="card-header">
+                    <span class="budget-badge">🎯 ROZPOČET 20.000 Kč</span>
+                    <div class="pc-name">BLACKVELOCITY R5</div>
+                    <div class="price">23.466 <small>Kč</small></div>
+                </div>
+                <div class="card-body">
+                    <ul class="spec-list">
+                        <li><strong>CPU:</strong> AMD Ryzen 5 5600</li>
+                        <li><strong>GPU:</strong> RTX 3050 6GB</li>
+                        <li><strong>RAM:</strong> 16GB DDR4</li>
+                        <li><strong>SSD:</strong> 1TB NVMe</li>
+                        <li><strong>FPS:</strong> 150+ v Robloxu</li>
+                    </ul>
+                    <a href="pc_za_20.000-MŘ.html" class="btn btn-primary">⚡ PROHLÉDNOUT SESTAVU</a>
+                </div>
+            </div>
+
+            <!-- KARTA 60.000 Kč -->
+            <div class="pc-card">
+                <div class="card-header">
+                    <span class="budget-badge">🎯 ROZPOČET 60.000 Kč</span>
+                    <div class="pc-name">VELOCITY R9</div>
+                    <div class="price">66.967 <small>Kč</small></div>
+                </div>
+                <div class="card-body">
+                    <ul class="spec-list">
+                        <li><strong>CPU:</strong> AMD Ryzen 9 9950X3D</li>
+                        <li><strong>GPU:</strong> RX 9060 XT 16GB</li>
+                        <li><strong>RAM:</strong> 32GB DDR5</li>
+                        <li><strong>SSD:</strong> 1TB NVMe</li>
+                        <li><strong>Zdroj:</strong> 1000W Gold</li>
+                    </ul>
+                    <a href="pc_za_60.000-MŘ.html" class="btn">🔥 PROHLÉDNOUT SESTAVU</a>
+                </div>
+            </div>
+
+            <!-- KARTA 200.000 Kč -->
+            <div class="pc-card">
+                <div class="card-header">
+                    <span class="budget-badge">🎯 ROZPOČET 200.000 Kč</span>
+                    <div class="pc-name">ULTRA R9</div>
+                    <div class="price">175.596 <small>Kč</small></div>
+                </div>
+                <div class="card-body">
+                    <ul class="spec-list">
+                        <li><strong>CPU:</strong> Ryzen 9 9950X3D</li>
+                        <li><strong>GPU:</strong> RTX 5080 16GB</li>
+                        <li><strong>RAM:</strong> 128GB DDR5</li>
+                        <li><strong>SSD:</strong> 8TB NVMe</li>
+                        <li><strong>Špička:</strong> Hry more</li>
+                    </ul>
+                    <a href="pc_za_200.000-MŘ.html" class="btn">🚀 PROHLÉDNOUT SESTAVU</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- KONTAKT + QR -->
+        <div class="footer">
+            <div class="contact">
+                <div class="contact-item"><i>🌐</i> www.matyas-rehor-custom.cz</div>
+                <div class="contact-item"><i>📧</i> matyas@rehorlabs.cz</div>
+                <div class="contact-item"><i>📞</i> +420 777 123 456</div>
+                <div class="contact-item"><i>📍</i> Brno, SŠIT 2.I</div>
+            </div>
+            <div class="qr-placeholder">
+                <span>QR ⚡</span>
+            </div>
+        </div>
+
+        <!-- POZNÁMKA -->
+        <div class="note">
+            Všechny sestavy jsou sestaveny dle pracovních listů Matyáše Řehoře, 2.I. Ceny včetně DPH.
+        </div>
+    </div>
+</body>
+</html>

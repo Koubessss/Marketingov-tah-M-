@@ -1,2 +1,0 @@
-# Marketingov-tah-M-
-Hovno
