@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MR Custom Labs · Velocity R9 · 60.000 Kč</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0c0f17;
+            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 30px 20px;
+            background-image: radial-gradient(circle at 70% 20%, rgba(255, 215, 0, 0.03) 0%, transparent 40%),
+                              repeating-linear-gradient(45deg, rgba(255, 215, 0, 0.01) 0px, rgba(255, 215, 0, 0.01) 2px, transparent 2px, transparent 8px);
+        }
+
+        .prospekt {
+            max-width: 1200px;
+            width: 100%;
+            background-color: #0f1117;
+            border-radius: 32px;
+            box-shadow: 0 25px 50px -8px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 215, 0, 0.25);
+            overflow: hidden;
+            color: #e9edf0;
+            position: relative;
+        }
+
+        .prospekt::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(255, 200, 50, 0.03) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            padding: 40px 40px 35px;
+        }
+
+        /* HEADER */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+            padding-bottom: 20px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            background: linear-gradient(145deg, #f0b90b, #ffdd44);
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 18px rgba(255, 200, 0, 0.3);
+        }
+
+        .logo span {
+            font-size: 32px;
+            font-weight: 800;
+            color: #0b0e14;
+            letter-spacing: -2px;
+        }
+
+        .brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: white;
+        }
+
+        .brand .sub {
+            font-size: 0.8rem;
+            color: #ffd966;
+            font-weight: 400;
+            letter-spacing: 1.5px;
+        }
+
+        .budget-tag {
+            background-color: #2a2e3f;
+            padding: 10px 25px;
+            border-radius: 60px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border: 1px solid #ffd966;
+            color: #ffd966;
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+        }
+
+        /* HERO */
+        .hero {
+            margin-bottom: 30px;
+        }
+
+        .product-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            background: linear-gradient(to right, #ffffff, #ffe484);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 20px rgba(255, 200, 0, 0.4);
+            margin-bottom: 5px;
+        }
+
+        .slogan {
+            font-size: 1.5rem;
+            color: #b0b9d0;
+            font-weight: 400;
+            border-left: 5px solid #ffd966;
+            padding-left: 20px;
+            margin-top: 8px;
+        }
+
+        .slogan strong {
+            color: #ffd966;
+        }
+
+        /* GRID OBRÁZEK + VÝHODY */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 35px;
+            margin-bottom: 35px;
+        }
+
+        .product-image {
+            background: linear-gradient(150deg, #1c1f2c, #13161f);
+            border-radius: 28px;
+            padding: 25px 20px 20px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            box-shadow: 0 20px 30px -15px black;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .image-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+
+        .image-container svg {
+            width: 100%;
+            max-height: 240px;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.8));
+        }
+
+        .pc-badge {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            background: #252a39;
+            border-radius: 40px;
+            padding: 6px 18px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #ffde7a;
+            border: 1px solid #4a3f1f;
+        }
+
+        .badge.highlight {
+            background: #ffd966;
+            color: #0b0e14;
+            font-weight: 700;
+        }
+
+        /* VÝHODY */
+        .benefits {
+            background: rgba(20, 24, 34, 0.8);
+            backdrop-filter: blur(4px);
+            border-radius: 28px;
+            padding: 28px 28px 20px;
+            border: 1px solid rgba(255, 215, 0, 0.15);
+        }
+
+        .benefits h3, .specs h3, .price-cta h3 {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #ffd966;
+            margin-bottom: 20px;
+            border-bottom: 1px dashed #334;
+            padding-bottom: 8px;
+        }
+
+        .benefits-list {
+            list-style: none;
+        }
+
+        .benefits-list li {
+            margin-bottom: 18px;
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+
+        .benefits-list li::before {
+            content: "⚡";
+            color: #ffd966;
+            font-size: 1.4rem;
+            line-height: 1;
+            min-width: 26px;
+        }
+
+        .benefit-highlight {
+            font-weight: 600;
+            color: white;
+            font-size: 1.05rem;
+        }
+
+        .benefit-desc {
+            color: #b0b9d0;
+            font-size: 0.95rem;
+        }
+
+        /* SPECIFIKACE + CENA */
+        .info-panel {
+            display: grid;
+            grid-template-columns: 1.4fr 0.6fr;
+            gap: 35px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        .specs {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 24px;
+            padding: 24px;
+            border: 1px solid #2e313e;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px 20px;
+        }
+
+        .spec-item {
+            border-bottom: 1px dotted #3a4055;
+            padding-bottom: 8px;
+        }
+
+        .spec-label {
+            font-size: 0.75rem;
+            color: #9da5c0;
+            text-transform: uppercase;
+        }
+
+        .spec-value {
+            font-size: 1.05rem;
+            font-weight: 500;
+            color: #f0f3fa;
+        }
+
+        .spec-value small {
+            color: #ffd966;
+            font-size: 0.8rem;
+        }
+
+        .price-cta {
+            background: linear-gradient(150deg, #1b1f2d, #0d1019);
+            border-radius: 24px;
+            padding: 24px;
+            border: 1px solid #3b414e;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .price-tag {
+            margin: 15px 0;
+        }
+
+        .main-price {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #ffd966;
+            line-height: 1;
+        }
+
+        .main-price small {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #aaa;
+        }
+
+        .price-note {
+            color: #8f9bb3;
+            font-size: 0.9rem;
+            margin-top: 6px;
+        }
+
+        .sale-badge {
+            background: #b12e4a;
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin: 10px 0 15px;
+            border: 1px solid #ff8080;
+        }
+
+        .cta-button {
+            background: #ffd966;
+            border: none;
+            border-radius: 60px;
+            padding: 16px 10px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            color: #0b0e14;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 8px 0 #9e7e2e, 0 8px 20px rgba(255,215,0,0.4);
+            margin-top: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+        }
+
+        .cta-button:hover {
+            background: #ffe174;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 0 #9e7e2e, 0 14px 28px rgba(255,215,0,0.5);
+        }
+
+        /* ZDŮVODNĚNÍ */
+        .reason-box {
+            background: #181d28;
+            border-radius: 20px;
+            padding: 20px 25px;
+            margin: 20px 0;
+            border-left: 5px solid #ffd966;
+            font-size: 1.1rem;
+            color: #ccd6f0;
+        }
+
+        .reason-box strong {
+            color: #ffd966;
+        }
+
+        /* FOOTER */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            background: #0a0c12;
+            border-radius: 40px;
+            padding: 18px 28px;
+            margin-top: 25px;
+            border: 1px solid #353d50;
+        }
+
+        .contact {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            font-size: 0.95rem;
+            color: #b9c2da;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-item i {
+            color: #ffd966;
+            font-style: normal;
+            font-weight: 700;
+        }
+
+        .qr-placeholder {
+            background: #222837;
+            width: 55px;
+            height: 55px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffd966;
+            border: 1px solid #ffd966;
+            font-weight: 500;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #ffd966;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 1px dashed #ffd966;
+        }
+
+        .back-link:hover {
+            color: white;
+        }
+
+        hr {
+            border-color: #2a2e3f;
+            margin: 20px 0 10px;
+        }
+
+        @media (max-width: 850px) {
+            .feature-grid, .info-panel {
+                grid-template-columns: 1fr;
+            }
+            .product-title { font-size: 2.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="prospekt">
+        <div class="content">
+            <!-- HLAVIČKA -->
+            <div class="header">
+                <div class="logo-area">
+                    <div class="logo">
+                        <span>MR</span>
+                    </div>
+                    <div class="brand">
+                        MATYÁŠ ŘEHOŘ <span class="sub">· CUSTOM LABS</span>
+                    </div>
+                </div>
+                <div class="budget-tag">
+                    🎯 ROZPOČET 60.000 Kč
+                </div>
+            </div>
+
+            <!-- NÁZEV + SLOGAN -->
+            <div class="hero">
+                <div class="product-title">VELOCITY R9</div>
+                <div class="slogan"><strong>Výkon, který rozpohybuje budoucnost</strong> — 16 jader, 32 vláken, DDR5</div>
+            </div>
+
+            <!-- OBRAZOVÁ ČÁST + VÝHODY -->
+            <div class="feature-grid">
+                <!-- OBRÁZEK -->
+                <div class="product-image">
+                    <div class="image-container">
+                        <svg viewBox="0 0 240 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="40" y="20" width="160" height="120" rx="12" fill="#1F2937" stroke="#FFD966" stroke-width="2.5" />
+                            <rect x="55" y="35" width="30" height="45" rx="6" fill="#11141F" stroke="#3F4A5A" stroke-width="1.5" />
+                            <circle cx="70" cy="60" r="5" fill="#2A9D8F" />
+                            <rect x="100" y="35" width="70" height="12" rx="4" fill="#2D3748" />
+                            <rect x="100" y="55" width="70" height="12" rx="4" fill="#2D3748" />
+                            <rect x="100" y="75" width="70" height="12" rx="4" fill="#2D3748" />
+                            <rect x="40" y="105" width="160" height="8" fill="#FFD966" rx="2" />
+                            <circle cx="120" cy="140" r="12" fill="#1F2937" stroke="#FFD966" stroke-width="2" />
+                            <circle cx="180" cy="140" r="12" fill="#1F2937" stroke="#FFD966" stroke-width="2" />
+                            <rect x="180" y="136" width="16" height="8" rx="2" fill="#FFD966" />
+                            <rect x="104" y="136" width="16" height="8" rx="2" fill="#FFD966" />
+                        </svg>
+                    </div>
+                    <div class="pc-badge">
+                        <span class="badge highlight">RX 9060 XT</span>
+                        <span class="badge">Ryzen 9</span>
+                        <span class="badge">32GB DDR5</span>
+                        <span class="badge">1000W Gold</span>
+                    </div>
+                </div>
+
+                <!-- 5 HLAVNÍCH VÝHOD -->
+                <div class="benefits">
+                    <h3>⚡ PROČ VELOCITY R9?</h3>
+                    <ul class="benefits-list">
+                        <li>
+                            <span class="benefit-highlight">Špičkový herní výkon</span><br>
+                            <span class="benefit-desc">RX 9060 XT 16GB + 32GB DDR5 = plynulé hraní ve 1440p i 4K.</span>
+                        </li>
+                        <li>
+                            <span class="benefit-highlight">16 jader pro cokoliv</span><br>
+                            <span class="benefit-desc">Ryzen 9 9950X3D zvládne hry, stream i střih videa najednou.</span>
+                        </li>
+                        <li>
+                            <span class="benefit-highlight">Budoucnost díky DDR5</span><br>
+                            <span class="benefit-desc">Nejmodernější paměti s frekvencí 6000MHz pro bleskovou odezvu.</span>
+                        </li>
+                        <li>
+                            <span class="benefit-highlight">Obří 1000W zdroj</span><br>
+                            <span class="benefit-desc">MSI MPG Gold — stabilní napájení i při přetaktování.</span>
+                        </li>
+                        <li>
+                            <span class="benefit-highlight">Designová ikona</span><br>
+                            <span class="benefit-desc">Skříň ASUS ROG STRIX HELIOS II s RGB podsvícením.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SPECIFIKACE + CENA -->
+            <div class="info-panel">
+                <div class="specs">
+                    <h3>🛠️ TECHNICKÁ SPECIFIKACE</h3>
+                    <div class="specs-grid">
+                        <div class="spec-item">
+                            <div class="spec-label">Procesor</div>
+                            <div class="spec-value">AMD Ryzen 9 9950X3D<br><small>16 jader / 32 vláken</small></div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Základní deska</div>
+                            <div class="spec-value">ASUS ROG STRIX B650E-E<br><small>Wi-Fi 6E, AM5</small></div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Operační paměť</div>
+                            <div class="spec-value">32 GB DDR5<br><small>6000MHz ADATA XPG</small></div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Úložiště</div>
+                            <div class="spec-value">1 TB Samsung 990 PRO<br><small>NVMe SSD</small></div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Grafická karta</div>
+                            <div class="spec-value">XFX Radeon RX 9060 XT<br><small>16GB OC</small></div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Zdroj</div>
+                            <div class="spec-value">1000W MSI MPG A1000GS<br><small>80+ Gold</small></div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Skříň</div>
+                            <div class="spec-value">ASUS ROG STRIX HELIOS II<br><small>ATX, bohaté chlazení</small></div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Operační systém</div>
+                            <div class="spec-value">Windows 11<br><small>nejpopulárnější volba</small></div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Konektivita</div>
+                            <div class="spec-value">Wi-Fi 6E, BT 5.3, USB-C<br><small>HDMI 2.1, DP</small></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CENA + CTA -->
+                <div class="price-cta">
+                    <h3>💸 SPECIÁLNÍ CENA</h3>
+                    <div class="price-tag">
+                        <div class="main-price">66 967 <small>Kč</small></div>
+                        <div class="price-note">včetně DPH / bez monitoru</div>
+                        <div class="sale-badge">⚡ SLEVA 5 % PRO STUDENTY ⚡</div>
+                    </div>
+                    <a href="index.html" class="cta-button" style="text-decoration: none;">🚀 OBJEDNAT NYNÍ</a>
+                    <p style="text-align:center; margin-top: 12px; font-size:0.8rem;">doprava zdarma · záruka 3 roky</p>
+                </div>
+            </div>
+
+            <!-- ZDŮVODNĚNÍ Z PRACOVNÍHO LISTU -->
+            <div class="reason-box">
+                <strong>📝 ZDŮVODNĚNÍ VÝBĚRU:</strong> Herní sestava vyšší třídy — ideální pro náročné hry, streamování a multitasking. Ryzen 9 s 16 jádry a RX 9060 XT zvládnou vše na ultra detailech.
+            </div>
+
+            <!-- BONUS: OPERAČNÍ SYSTÉM + REFERENCE -->
+            <div style="background: #1a1f2c; border-radius: 18px; padding: 16px 22px; margin-bottom: 15px; border-left: 4px solid #ffd966;">
+                <strong>⭐ BONUS — Operační systém:</strong> Windows 11 Pro — protože je to standard pro hry i práci, podporuje nejnovější technologie a je součástí marketingu („fekálie“ řešeny :)).
+            </div>
+
+            <!-- ZÁKAZNICKÁ REFERENCE -->
+            <div style="background: #0f131e; border-radius: 18px; padding: 16px 22px; margin-bottom: 20px; font-style: italic; color: #b5c2e0;">
+                „Nejlepší poměr cena/výkon v téhle třídě. Cyberpunk 2077 v pohodě na ultra, přitom cena pořád pod 70k.“ — David, 3.I
+            </div>
+
+            <!-- KONTAKT + ZPĚT NA VÝBĚR -->
+            <div class="footer">
+                <div class="contact">
+                    <div class="contact-item"><i>🌐</i> www.matyas-rehor-custom.cz</div>
+                    <div class="contact-item"><i>📧</i> matyas@rehorlabs.cz</div>
+                    <div class="contact-item"><i>📞</i> +420 777 123 456</div>
+                </div>
+                <div class="qr-placeholder">
+                    <span>QR ⚡</span>
+                </div>
+            </div>
+
+            <!-- ZPĚT NA HLAVNÍ STRÁNKU -->
+            <hr>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <a href="index.html" class="back-link">← Zpět na výběr sestav</a>
+                <span style="color: #4a5470;">Matyáš Řehoř · 2.I · 26. 2. 2026</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
